@@ -94,6 +94,7 @@ let i = 0;
 
 addBtn.addEventListener("click", (event) => {
   event.preventDefault();
+  
   const inputValue = input.value;
 
   if (inputValue.trim().length === 0) {
@@ -139,10 +140,8 @@ addBtn.addEventListener("click", (event) => {
       console.log(textInput[index]);
       if (!textInput[index].classList.contains("cross")) {
         textInput[index].classList.toggle("cross");
-        alertMessageEror("Выполнено!");
       } else {
-        textInput[index].classList.toggle("cross");
-        alertMessageEror("Возращаем!");
+        textInput[index].classList.add("cross");
       }
     });
   });
@@ -161,6 +160,7 @@ addBtn.addEventListener("click", (event) => {
       }, 4000);
     });
   });
+  input.value = ''
   localStorage.setItem('whole' , modalList.innerHTML)
 
 });
