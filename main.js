@@ -109,7 +109,7 @@ addBtn.addEventListener("click", (event) => {
   <div class="block block${i}">
   <div class="btn-main">
       <div class="buttons">
-          <img class="doneBtn done${(i += 1)}" src="check_5610944.png" alt="">
+          <img class="doneBtn " src="check_5610944.png" alt="">
           <img class="cancelBtn cancel${i}" src="delete_10100000.png" alt="">
       </div>
   </div>
@@ -135,13 +135,18 @@ addBtn.addEventListener("click", (event) => {
   const textInput = document.querySelectorAll(".dolist-text");
   const doneButtons = document.querySelectorAll(".doneBtn");
   const cancelButtons = document.querySelectorAll(".cancelBtn");
+
   doneButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
       console.log(textInput[index]);
       if (!textInput[index].classList.contains("cross")) {
-        textInput[index].classList.toggle("cross");
-      } else {
         textInput[index].classList.add("cross");
+        localStorage.setItem('whole' , modalList.innerHTML)
+
+      } else {
+        textInput[index].classList.remove("cross");
+        localStorage.setItem('whole' , modalList.innerHTML)
+        return;
       }
     });
   });
@@ -151,7 +156,10 @@ addBtn.addEventListener("click", (event) => {
       alertMessageEror("Очистка!");
       const closeBtn = document.querySelector(".close-modal");
       closeBtn.addEventListener("click", () => {
+        
         modalWindow.classList.remove("active");
+        localStorage.setItem('whole' , modalList.innerHTML)
+
         clearTimeout(forCancelTimeout);
         return;
       });
