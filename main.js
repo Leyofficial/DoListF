@@ -8,14 +8,12 @@ const modalText = document.querySelector(".text-alert");
 const signOutBtn = document.querySelector(".sign-in");
 const modalList = document.querySelector(".whole");
 
-
-
 window.onload = () => {
   main = document.querySelector(".main-main");
   main.classList.toggle("blur");
   signOutBtn.classList.toggle("hidden");
-  const divStorage = localStorage.getItem('whole')
-  if (divStorage){
+  const divStorage = localStorage.getItem("whole");
+  if (divStorage) {
     modalList.innerHTML = divStorage;
   }
   // modalList.append(divStorage)
@@ -87,14 +85,13 @@ btnLogin.addEventListener("click", (event) => {
 });
 
 const input = document.querySelector(".input");
-const usersList = [];
 const addBtn = document.querySelector(".add");
 
 let i = 0;
 
 addBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  
+
   const inputValue = input.value;
 
   if (inputValue.trim().length === 0) {
@@ -103,72 +100,78 @@ addBtn.addEventListener("click", (event) => {
     return;
   }
 
-  const createElement = document.createElement("div");
-
+  // const createElement = document.createElement("div");
   const htmlCode = `
-  <div class="block block${i}">
-  <div class="btn-main">
-      <div class="buttons">
-          <img class="doneBtn " src="check_5610944.png" alt="">
+    <div class="block block${i}">
+      <div class="btn-main">
+        <div class="buttons">
+        <button>
+          <img class="doneBtn" src="check_5610944.png" alt="">
+          </button>
+          <button>
           <img class="cancelBtn cancel${i}" src="delete_10100000.png" alt="">
+          </button>
+        </div>
       </div>
-  </div>
-  <div class="input-answer">
-      <p class="dolist-text text${i}">
+      <div class="input-answer">
+        <p class="dolist-text text${i}">
           ${inputValue}
-      </p>
-  </div>
-</div>`;
+        </p>
+      </div>
+    </div>`;
 
-  const task = {
-    id: `block${i}`,
-    title: `${inputValue}`,
-    isDone: false,
-  };
+  // createElement.innerHTML = htmlCode;
+  modalList.insertAdjacentHTML("beforeend", htmlCode);
+  // modalList.append(createElement);
 
-  usersList.push(task);
+  // newDoneBTN.map((button, index) => {
+  //   button.addEventListener("click", (event) => {
+  //     if (!textInput[index].classList.contains("cross")) {
+  //       textInput[index].classList.add("cross");
+  //     } else if (textInput[index].classList.contains("cross")) {
+  //       textInput[index].classList.remove("cross");
+  //     }
+  //     localStorage.setItem("whole", modalList.innerHTML);
+  //   });
+  // });
 
-  createElement.innerHTML += htmlCode;
-
-  modalList.append(createElement);
-  const block = document.querySelectorAll(".block");
-  const textInput = document.querySelectorAll(".dolist-text");
   const doneButtons = document.querySelectorAll(".doneBtn");
+  const textInput = document.querySelectorAll(".dolist-text");
+  const block = document.querySelectorAll(".block");
   const cancelButtons = document.querySelectorAll(".cancelBtn");
 
-  doneButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      console.log(textInput[index]);
-      if (!textInput[index].classList.contains("cross")) {
-        textInput[index].classList.add("cross");
-        localStorage.setItem('whole' , modalList.innerHTML)
-
-      } else {
-        textInput[index].classList.remove("cross");
-        localStorage.setItem('whole' , modalList.innerHTML)
-        return;
-      }
+  doneButtons.forEach((elem, index) => {
+    elem.addEventListener("click", () => {
+      textInput[index].classList.add("cross");
+      localStorage.setItem("whole", modalList.innerHTML);
     });
   });
+
+  textInput.forEach((item , i) => {
+    item.addEventListener('click' , () =>{
+      textInput[i].classList.remove("cross")
+      localStorage.setItem("whole", modalList.innerHTML);
+    })
+  })
+
   let forCancelTimeout;
   cancelButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
       alertMessageEror("Очистка!");
       const closeBtn = document.querySelector(".close-modal");
       closeBtn.addEventListener("click", () => {
-        
         modalWindow.classList.remove("active");
-        localStorage.setItem('whole' , modalList.innerHTML)
-
         clearTimeout(forCancelTimeout);
-        return;
       });
       forCancelTimeout = setTimeout(() => {
         block[index].remove();
       }, 4000);
+      localStorage.setItem("whole", modalList.innerHTML);
     });
   });
-  input.value = ''
-  localStorage.setItem('whole' , modalList.innerHTML)
 
+  input.value = "";
+  localStorage.setItem("whole", modalList.innerHTML);
 });
+
+// const cancelButtons = document.querySelectorAll(".cancelBtn");
