@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "../project-26jul"
+	},
+	{
+		"path": "."
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "DoList"
+  }
+}

@@ -16,7 +16,6 @@ window.onload = () => {
   if (divStorage) {
     modalList.innerHTML = divStorage;
   }
-  // modalList.append(divStorage)
   const localData = localStorage.getItem("login");
   if (localData === "true") {
     alertMessage("Добро пожаловать!");
@@ -119,22 +118,7 @@ addBtn.addEventListener("click", (event) => {
         </p>
       </div>
     </div>`;
-
-  // createElement.innerHTML = htmlCode;
   modalList.insertAdjacentHTML("beforeend", htmlCode);
-  // modalList.append(createElement);
-
-  // newDoneBTN.map((button, index) => {
-  //   button.addEventListener("click", (event) => {
-  //     if (!textInput[index].classList.contains("cross")) {
-  //       textInput[index].classList.add("cross");
-  //     } else if (textInput[index].classList.contains("cross")) {
-  //       textInput[index].classList.remove("cross");
-  //     }
-  //     localStorage.setItem("whole", modalList.innerHTML);
-  //   });
-  // });
-
   const doneButtons = document.querySelectorAll(".doneBtn");
   const textInput = document.querySelectorAll(".dolist-text");
   const block = document.querySelectorAll(".block");
@@ -143,16 +127,19 @@ addBtn.addEventListener("click", (event) => {
   doneButtons.forEach((elem, index) => {
     elem.addEventListener("click", () => {
       textInput[index].classList.add("cross");
+      alertMessageEror(`Что бы отменить выполнение нажмите 
+      <br> на текст задачи!`)
       localStorage.setItem("whole", modalList.innerHTML);
     });
   });
 
-  textInput.forEach((item , i) => {
-    item.addEventListener('click' , () =>{
-      textInput[i].classList.remove("cross")
+  textInput.forEach((item, i) => {
+    item.addEventListener("click", () => {
+      textInput[i].classList.remove("cross");
       localStorage.setItem("whole", modalList.innerHTML);
-    })
-  })
+    });
+  });
+
 
   let forCancelTimeout;
   cancelButtons.forEach((button, index) => {
@@ -173,5 +160,3 @@ addBtn.addEventListener("click", (event) => {
   input.value = "";
   localStorage.setItem("whole", modalList.innerHTML);
 });
-
-// const cancelButtons = document.querySelectorAll(".cancelBtn");
