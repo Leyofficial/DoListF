@@ -11,9 +11,11 @@ span {
   display: none;
 }
 
-.cross {
+.dolist-text--cross{
   text-decoration: line-through;
   color: green;
+  font-size: 24px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .switch {
